@@ -1,0 +1,51 @@
+<html>
+<title>Registration</title>
+<head>
+<script type="text/javascript">
+function do1()
+{
+	var p=document.getElementById("pass").value;
+	var p1=document.getElementById("pass1").value;
+	if(p==p1){
+	alert("password confirmed");
+	return true;}
+	else
+	{
+		alert("password missmatch");
+		return false;
+	}
+	
+	}
+</script>
+</head>
+<form method="post" onsubmit="javascript:return do1()"action="/hii/webapi/registration_do">
+<table border="0" align='center'>
+<tr>
+<td>Name</td>
+<td><input type='text' onkeypress="return ((event.charCode >= 65 || event.charCode >= 97) && ( event.charCode <= 90 || event.charCode <= 122)) "  name='name' id='name'></td>
+</tr>
+<tr>
+<td>Mobile</td>
+<td><input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name='mobile' id='mobile'></td>
+</tr>
+<tr>
+<td>email</td>
+<td><input type='email' name='email' id='email'></td>
+</tr>
+<tr>
+<td>username</td>
+<td><input type='text' name='uname' id='uname'></td>
+</tr>
+<tr>
+<td>password</td>
+<td><input type='password' name='pass' id='pass'></td>
+</tr>
+<tr>
+<td>re enter password</td>
+<td><input type='password' name='pass1' id='pass1'></td>
+</tr>
+
+<tr><td colspan='2'><input type='submit' value='submit'></td></tr>
+</table>
+</form>
+</html>

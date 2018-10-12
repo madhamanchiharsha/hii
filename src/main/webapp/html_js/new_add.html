@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript">
+function do1()
+{
+alert("items added successfully");
+}
+
+</script>
+<meta charset="ISO-8859-1">
+<title>Inserting new items</title>
+</head>
+<body>
+<form method="post" onsubmit="javascript:return do1()" action="/hii/webapi/admin_new1">
+<table border="0">
+<tr>
+<td>
+Item ID
+</td>
+<td>Quantity</td>
+<td>Unit Price</td>
+<td>minimum item</td>
+</tr>
+<tr>
+<td><input type="text" name="item_id" id="item_id"></td>
+<td><input type="number" name="quantity" id="quantity"></td>
+<td><input type="number" name="Unit_price" id="Unit_price"></td>
+<td><input type="number" name="min" id="min"></td>
+</tr>
+</table>
+<input type="submit" value="submit">
+</form>
+</body>
+</html>

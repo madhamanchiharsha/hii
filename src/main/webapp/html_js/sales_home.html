@@ -1,0 +1,100 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<title>Sales Home</title>
+</head>
+<body>
+<div ng-app="myModule" ng-controller="myController">
+<p>Search:<input type="text" ng-model="item"></p>
+<p ng-bind="item">{{item}}</p>
+<form>
+<table border="1" cellpadding="5">
+<tbody>
+<tr>
+<th>Item ID</th>
+<th>Available</th>
+<th>price</th>
+<th>Quantity</th>
+<th>Add to Cart</th>
+</tr>
+<tr ng-repeat="x in items | filter : item ">
+<td>{{x.item_id}}</td>
+<td id={{x.item_id}}_count>{{x.count_item}}</td>
+<td id={{x.item_id}}_price>{{x.price}}</td>
+<td><input type="number" min=0 id={{x.item_id}}_quantity ></td>
+<td><button  id={{x.item_id}} onClick="validation(this.id)">Buy</button></td>
+</tr>
+<tr><td><button id="done" onClick="validation(this.id)">Done</button></td></tr>
+</tbody>
+</table>
+</form>
+</div>
+<p id="heade"></p>
+<p id="demo"></p>
+<script>
+var db_items={};
+var servitems;
+var total_bill=0;
+var app= angular
+		 .module('myModule',[])
+		 app.controller('myController',function($scope,$http){
+			// alert("1");
+			 $http.get(
+        			"home_sales_json"
+        			//contentType: "application/json",
+        			//dataType: "json"
+			).then(function mysucess(response){//request 
+				$scope.items=response.data;
+				servitems=response.data;
+			document.write(items);
+			 },function(response){
+				 alert(response+"Error");
+				 $scope.items=response.status;
+				 });
+			 $scope.cart=function(){
+				 var item_id=butvalue.currentTarget.id;
+				 //alert();
+				 alert(item_id);
+			 };
+			  
+			 });
+var count=0;		 
+function validation(click_id)
+{
+	if(click_id=="done")
+	{
+		alert ("done");
+		var t="total_bill";
+		db_items[t]=total_bill;
+		//document.write(db_items);
+//		db_items[cick_id]=quantity1;
+//		count=count+1;
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {};
+    document.getElementById("heade").innerHTMl="invoice";
+    for (x in db_items) {
+ 
+    	document.getElementById("demo").innerHTML += "<PRE> "+x+"  "+db_items[x]+"</br>"+"</PRE>";
+}
+	
+    xhttp.open("POST", "purchase_done");
+    xhttp.setRequestHeader("Content-Type","application/json");
+	var sdata=JSON.stringify(db_items);
+	xhttp.send(sdata);
+	}
+	else
+	{
+		var x=click_id+"_quantity";
+		var quantity1=document.getElementById(x).value;
+		db_items[click_id]= quantity1;
+		var b=click_id+"_price";
+		var bill=document.getElementById(b).innerHTML;
+		bill=bill*quantity1;
+		
+}
+	total_bill=total_bill+bill;
+}
+</script>
+</body>
+
+</html>
